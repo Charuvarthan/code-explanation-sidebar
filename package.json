@@ -1,16 +1,46 @@
 {
   "name": "code",
+  "displayName": "AI Code Explainer",
+  "description": "Get instant LLM-based code explanations and save them as notes in VS Code.",
   "version": "1.0.0",
-  "description": "ai-code explainer",
-  "main": "index.js",
+  "publisher": "chapri",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.explainCode",
+    "onCommand:extension.openNotesSidebar"
+  ],
+  "main": "./extension/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.explainCode",
+        "title": "Explain Selected Code with LLM"
+      },
+      {
+        "command": "extension.openNotesSidebar",
+        "title": "Open LLM Notes Sidebar"
+      }
+    ]
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "ai",
     "code",
-    "explainer"
+    "explainer",
+    "LLM",
+    "DeepSeek",
+    "VSCode Extension"
   ],
   "author": "chapri",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vscode": "^1.1.37"
+  }
 }

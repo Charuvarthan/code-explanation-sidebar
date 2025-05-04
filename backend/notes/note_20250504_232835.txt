@@ -1,0 +1,27 @@
+Here's a point-wise explanation of the given Python code for calculating factorial using memoization:
+
+1. **Function Definition**:
+   - The function `factorial` is defined with two parameters:
+     - `n`: The number for which factorial is to be computed.
+     - `memo`: A dictionary (default argument) to store previously computed results (memoization).
+
+2. **Memoization Check**:
+   - `if n in memo:` checks if the factorial of `n` has already been computed and stored in `memo`.
+   - If found (`True`), it directly returns the stored value (`return memo[n]`), avoiding redundant calculations.
+
+3. **Base Case**:
+   - `if n == 0 or n == 1:` checks if `n` is 0 or 1 (the base cases for factorial).
+   - Returns `1` because `0! = 1` and `1! = 1`.
+
+4. **Recursive Calculation**:
+   - If `n` is not in `memo` and not a base case, the function computes `n!` recursively:
+     - `memo[n] = n * factorial(n - 1, memo)` calculates `n!` by multiplying `n` with `(n-1)!` (recursive call).
+     - The result is stored in `memo[n]` for future use (memoization).
+
+5. **Return Result**:
+   - The computed value (`memo[n]`) is returned as the result of `factorial(n)`.
+
+### Key Points:
+- **Memoization**: This technique optimizes the function by caching results of expensive function calls to avoid repeated work.
+- **Default Argument**: `memo={}` is initialized only once when the function is defined (Python's default argument behavior), so subsequent calls reuse the same dictionary.
+- **Efficiency**: Without memoization, the time complexity would be O(n) for each call. With memoization, repeated calls for the same `n` are O(1) after the first computation.

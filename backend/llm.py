@@ -7,7 +7,7 @@ import os
 # DeepSeek API details
 API_URL = "https://api.deepseek.com/v1/chat/completions"
 API_KEY = "sk-4e5423e4c25d4967ab3e80a120d22b2e"
-MODEL = "deepseek-chat"  # You can change this if using another model
+MODEL = "deepseek-chat"
 
 # Step 1: Get selected code from command-line
 if len(sys.argv) < 2:
@@ -43,12 +43,13 @@ if response.status_code != 200:
 data = response.json()
 explanation = data['choices'][0]['message']['content']
 
-# Step 4: Save explanation to a local .txt file
-timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-filename = f"backend/notes/note_{timestamp}.txt"
+# ✅ FIX: Use absolute path for backend/notes
+script_dir = os.path.dirname(os.path.abspath(__file__))  # backend/
+notes_dir = os.path.join(script_dir, "notes")
+os.makedirs(notes_dir, exist_ok=True)
 
-# Ensure notes folder exists
-os.makedirs("backend/notes", exist_ok=True)
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+filename = os.path.join(notes_dir, f"note_{timestamp}.txt")
 
 with open(filename, "w", encoding="utf-8") as f:
     f.write(explanation)
